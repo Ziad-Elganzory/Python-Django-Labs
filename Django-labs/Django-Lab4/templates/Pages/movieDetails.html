@@ -1,0 +1,33 @@
+{% extends 'Parts/main.html' %}
+
+{% block main-content %}
+<div class="container p-4 mt-5 bg-white shadow rounded-lg">
+    <div class="row">
+        <div class="col-md-4">
+            {% if movie.poster_image %}
+            <img src="{{ movie.poster_image.url }}" class="img-fluid rounded mb-4" alt="{{ movie.title }}">
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <h2 class="h3 mb-4 text-dark">{{ movie.title }}</h2>
+            <p class="lead mb-4 text-dark">{{ movie.description }}</p>
+            <p class="mb-2 text-muted">
+                <strong class="text-dark">Release Date:</strong>
+                {{ movie.release_date }}
+            </p>
+            <p class="mb-2 text-muted">
+                <strong class="text-dark">Categories:</strong>
+                {% for category in movie.categories.all %}
+                {{ category.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+            <p class="mb-2 text-muted">
+                <strong class="text-dark">Casts:</strong>
+                {% for cast in movie.casts.all %}
+                {{ cast.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
